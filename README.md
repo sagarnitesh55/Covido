@@ -1,0 +1,1 @@
+The 'Covido'app is all about asking you a few quick yes or no questions about how you’re feeling - things like fever, cough, or if you’ve travelled overseas. Based on your answers, it gives you a quick prediction of whether your symptoms might be linked to COVID-19.
