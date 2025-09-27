@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title>Covido</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <!-- bootstrap css -->
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <!-- style css -->
+      <link rel="stylesheet" href="css/style.css">
+      <!-- Responsive-->
+      <link rel="stylesheet" href="css/responsive.css">
+      <!-- fevicon -->
+      <link rel="icon" href="images/corona.png" type="image/gif" />
+      <!-- Scrollbar Custom CSS -->
+      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+      <link rel="stylesheet" href="css/owl.carousel.min.css"> 
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+      <link rel="stylesheet" href="https://rawgit.com/LeshikJanz/libraries/master/Bootstrap/baguetteBox.min.css">
+        <!-- <script src="js/taketest.js"></script> -->
+      <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+      <!-- Javascript files-->
+      <script src="js/jquery.min.js"></script>
+      <script src="js/bootstrap.bundle.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+      <script src="js/owl.carousel.min.js"></script>
+      <script src="js/custom.js"></script>
+   </head>
+   <!-- body -->
+   <body class="main-layout inner_page">
+      <!-- loader  -->
+      <div class="loader_bg">
+         <div class="loader"><img src="images/loading.gif" alt="#"/></div>
+      </div>
+      <!-- end loader -->
+      <!-- top -->
+                    <!-- header -->
+         <header class="header-area">
+           <!--  <div class="left">
+               <a href="Javascript:void(0)"><i class="fa fa-search" aria-hidden="true"></i></a>
+            </div>
+            <div class="right">
+               <a href="Javascript:void(0)"><i class="fa fa-user" aria-hidden="true"></i></a>
+            </div> -->
+            <div class="container">
+               <div class="row d_flex">
+                  <!-- <div class="col-sm-3 logo_sm">
+                     <div class="logo">
+                        <a href="index.html"></a>
+                     </div>
+                  </div> -->
+                  <div class="col-lg-10 offset-lg-1 col-md-12 col-sm-9">
+                     <div class="navbar-area">
+                        <nav class="site-navbar">
+                           <ul>
+                              <li><a href="index.html">Home</a></li>
+                              <li><a href="about.html">About</a></li>
+                              <li><a class="active" href="taketest.html">take test</a></li>
+                              <!-- <li><a href="index.html" class="logo_midle">covid</a></li> -->
+                              <li><a href="news.html">news</a></li>
+
+                           </ul>
+                           <button class="nav-toggler">
+                           <span></span>
+                           </button>
+                        </nav>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </header>
+      <!-- end header -->
+
+        <!-- cases -->
+        <div class="cases py-5">
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-lg-8 col-md-10 col-sm-12">
+
+                <!-- Title -->
+                <div class="titlepage text-center mb-4">
+                  <h2 class="fw-bold">🩺 Take Covid Test</h2>
+                  <p class="text-muted">Answer a few quick questions to get health advice.</p>
+                </div>
+
+                <!-- Start button -->
+                <div class="text-center mb-3">
+                  <button class="read_more" onclick="startCheckup()">Start Checkup</button>
+                </div>
+
+                <!-- Question box -->
+                <div id="question-container" class="card shadow-sm p-4 text-center" style="display:none;">
+                  <div class="mb-3">
+                    <h5 id="question" class="fw-semibold"></h5>
+                  </div>
+
+                  <input type="text" id="userInput" class="form-control form-control-lg mb-3 text-center" placeholder="Type your answer here..." />
+
+                  <div class="d-flex justify-content-center gap-2">
+                    <button class="btn btn-success submit_Ans px-4" onclick="submitAnswer()">Submit</button>
+                    <button class="btn btn-outline-secondary px-4" onclick="startVoiceInput()">🎤 Speak</button>
+                  </div>
+                </div>
+
+                <!-- Result -->
+                <div id="result" class="alert alert-info text-center mt-4 fw-semibold" style="display:none;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end cases -->
+
+      <!--  footer -->
+      <footer>
+         <div class="footer">           
+            <div class="copyright">
+               <div class="container">
+                  <div class="row">
+                     <div class="col-md-8 offset-md-2">
+                         <p>© <script>document.write(new Date().getFullYear());</script> All Rights Reserved. Design by <a href="https://sagarnitesh55.github.io/MyPortfolio/">Nitesh Sagar</a></p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </footer>
+      <!-- end footer -->
+  
+      <script>
+              
+        const questions = [
+          { key: 'name', text: 'Please enter your name:' },
+          { key: 'age', text: 'Please enter your age:', isNumber: true },
+          { key: 'sick', text: 'Are you feeling sick? (yes/no)', valid: ['yes', 'no'] },
+          { key: 'symptom', text: 'Are you feeling cold or fever? (cold/fever/yes/no)', valid: ['yes', 'no', 'cold', 'fever'] }
+        ];
+
+
+        let state = {
+          index: 0,
+          data: {},
+          result: '',
+          mode: 'main',          // main | followup | done
+          followupHandler: null
+        };
+
+        function startCheckup() {
+          
+          state.index = 0;
+          state.data = {};
+          state.result = '';
+          state.mode = 'main';
+          state.followupHandler = null;
+
+          document.getElementById('result').style.display = "none";
+          document.getElementById('result').innerText = '';
+          document.getElementById('question-container').style.display = 'block';
+
+          showQuestion();
+        }
+
+        function showQuestion(text = null) {
+          
+          const question = text || questions[state.index]?.text;
+          document.getElementById('question').innerText = question;
+          const input = document.getElementById('userInput');
+          input.value = '';
+          input.focus();
+        }
+
+        function capitalizeFirstLetter(str) {
+          
+          if (typeof str !== 'string' || str.length === 0) {
+            return str; // Handle non-string input or empty strings
+          }
+
+          return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        function submitAnswer() {
+          
+          const input = document.getElementById('userInput').value.trim();
+          if (!input) return;
+
+          if (state.mode == 'main') {
+            const currentQ = questions[state.index];
+            if (!currentQ) return;
+
+            let normalizedInput = input.toLowerCase();
+
+            if (currentQ.valid && !currentQ.valid.includes(normalizedInput)) {
+              alert('Please enter: ' + currentQ.valid.join(' / '));
+              return;
+            }
+            if (currentQ.isNumber && (isNaN(parseInt(normalizedInput)) || parseInt(normalizedInput) <= 0 || parseInt(normalizedInput) > 150)) {
+              alert('Please enter a valid age.');
+              return;
+            }
+
+            if(currentQ.key == 'name' && (normalizedInput == 'yes' || normalizedInput == 'no' || (!isNaN(normalizedInput)))){
+              alert('Please enter your correct name!');
+              return;
+            }
+
+            // if(currentQ.key == 'name' && (!isNaN(normalizedInput))){
+            //   alert('Please enter your correct name!');
+            //   return;
+            // }
+
+            const value = currentQ.isNumber
+              ? parseInt(normalizedInput)
+              : (currentQ.key == 'name' ? input.split(" ")[0] : normalizedInput);
+
+            state.data[currentQ.key] = value;
+            state.index++;
+
+            //var csch = questions[state.index];
+      
+            if (state.index >= questions.length || (currentQ.valid && normalizedInput == 'no') ) {
+              state.mode = 'followup';
+              askFollowUps();
+            } else {
+              showQuestion();
+            }
+
+          } else if (state.mode == 'followup' && typeof state.followupHandler == 'function') {
+            state.followupHandler(input.toLowerCase());
+          }
+        }
+
+          // handle Enter key
+          document.getElementById('userInput').addEventListener('keypress', function(event) {
+            if (event.key == 'Enter') {
+              event.preventDefault();
+              submitAnswer();
+            }
+          });
+
+          function startVoiceInput() {
+            if (!('webkitSpeechRecognition' in window)) {
+              alert('Speech recognition is not supported in this browser.');
+              return;
+            }
+
+            const recognition = new webkitSpeechRecognition();
+            recognition.lang = 'en-US';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            recognition.start();
+
+            recognition.onresult = function(event) {
+              const transcript = event.results[0][0].transcript;
+              document.getElementById('userInput').value = transcript;
+              submitAnswer(); // auto-submit
+            };
+
+            recognition.onerror = function(event) {
+              alert('Error occurred in speech recognition: ' + event.error);
+            };
+          }
+
+          function askFollowUps() {
+            
+            let name = state.data.name;
+       
+            name = capitalizeFirstLetter(name);
+         
+            const symptom = state.data.symptom;
+
+            // ✅ FIX: If user said "no" to being sick → stop immediately
+            //alert('HIIII ' + state.data.sick);
+            if (state.data.sick == 'no') 
+            {
+              state.result = `Very good! Stay healthy ${name}. Thanks for using the service!`;
+              return done();
+            }
+            // else
+            // {// Otherwise follow-up logic
+              if (symptom == 'fever') {
+                ask("Did you travel overseas recently? (yes/no)", ['yes','no'], (overseas) => {
+                  if (overseas == 'yes') {
+                    ask("Were you quarantined after returning? (yes/no)", ['yes','no'], (quarantine) => {
+                      state.result = (quarantine == 'yes')
+                        ? `Hey ${name}, no need to worry! Take proper rest and medicines.`
+                        : `${name}, please consult a COVID health center for a check-up.`;
+                      done();
+                    });
+                  } else {
+                    ask("Were you in contact with a COVID patient? (yes/no)", ['yes','no'], (contact) => {
+                      state.result = (contact == 'yes')
+                        ? `${name}, please consult a COVID health center for a check-up.`
+                        : `Hey ${name}, no need to worry! Take proper rest and medicines.`;
+                      done();
+                    });
+                  }
+                });
+
+              } else if (symptom == 'cold') {
+                ask("Did you travel overseas recently? (yes/no)", ['yes','no'], (overseas) => {
+                  if (overseas == 'yes') {
+                    state.result = `${name}, please get checked at a COVID health center and take rest.`;
+                    done();
+                  } else {
+                    ask("Are you feeling only cold? (yes/no)", ['yes','no'], (onlyCold) => {
+                      if (onlyCold == 'yes') {
+                        state.result = `${name}, no worry! consult a doctor nearby and take medicine.`;
+                        done();
+                      } else {
+                        ask("Were you in contact with a COVID patient? (yes/no)", ['yes','no'], (contact) => {
+                          state.result = (contact == 'yes')
+                            ? `${name}, please consult a COVID health center for a check-up.`
+                            : `Hey ${name}, no need to worry! Take proper rest and medicines.`;
+                          done();
+                        });
+                      }
+                    });
+                  }
+                });
+
+              } else if (symptom == 'yes') {
+                ask("Are you feeling fever? (yes/no)", ['yes','no'], (hasFever) => {
+                  if (hasFever == 'yes') {
+                    state.data.symptom = 'fever';
+                    askFollowUps();
+                  } else {
+                    ask("Are you feeling cold? (yes/no)", ['yes','no'], (hasCold) => {
+                      if (hasCold == 'yes') {
+                        state.data.symptom = 'cold';
+                        askFollowUps();
+                      } else {
+                        state.result = `Great! Enjoy your health ${name}, you don't need to worry.`;
+                        done();
+                      }
+                    });
+                  }
+                });
+
+              } else {
+                ask("Are you feeling headache? (yes/no)", ['yes','no'], (headache) => {
+                  if (headache == 'yes') {
+                    ask("Did you travel overseas in the last 2 weeks? (yes/no)", ['yes','no'], (travel) => {
+                      if (travel == 'yes') {
+                        ask("Were you quarantined after returning? (yes/no)", ['yes','no'], (quarantine) => {
+                          state.result = (quarantine == 'yes')
+                            ? `Hey ${name}, no need to worry! Rest and take medicines.`
+                            : `${name}, please consult a COVID health center for a check-up.`;
+                          done();
+                        });
+                      } else {
+                        state.result = `${name}, don't worry. Just visit a doctor and take medicine.`;
+                        done();
+                      }
+                    });
+                  } else {
+                    state.result = `Very good! Stay healthy ${name}. Thanks for using the service!`;
+                    done();
+                  }
+                });
+              }
+            //}
+
+          }
+
+          function ask(msg, valid, cb) {
+            document.getElementById('question').innerText = msg;
+            document.getElementById('userInput').value = '';
+            document.getElementById('userInput').focus();
+
+            state.followupHandler = function(input) {
+              if (!valid.includes(input)) {
+                alert('Please enter: ' + valid.join(' / '));
+                return;
+              }
+              cb(input);
+            };
+          }
+
+          function done() {
+            document.getElementById('question-container').style.display = 'none';
+            const res = document.getElementById('result');
+            res.style.display = "block";
+            res.innerText = state.result;
+            state.mode = "done";        // ✅ prevents further input
+            state.followupHandler = null;
+          }
+
+      </script>
+   </body>
+
+    
+</html>
